@@ -7,10 +7,10 @@ using CleanArchitect.Application.DTOs.LeaveType;
 
 namespace CleanArchitect.Application.DTOs.LeaveAllocation
 {
-    public class CreateLeaveAllocationDto
+    public class CreateLeaveAllocationDto : ILeaveAllocationDto
     {
         public int NumberOfDays { get; set; }
         public int LeaveTypeId { get; set; }
-        public int period { get; set; }
+        public int Period { get; set; }
     }
 }
