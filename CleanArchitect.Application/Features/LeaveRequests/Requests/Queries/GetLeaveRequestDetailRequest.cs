@@ -9,7 +9,7 @@ using MediatR;
 
 namespace CleanArchitect.Application.Features.LeaveRequests.Requests.Queries
 {
-    public class GetLeaveRequestDetailsRequest : IRequest<LeaveRequestDto>
+    public class GetLeaveRequestDetailRequest : IRequest<LeaveRequestDto>
     {
         public int Id { get; set; }
     }

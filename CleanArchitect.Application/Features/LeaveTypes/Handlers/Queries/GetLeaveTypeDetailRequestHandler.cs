@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using CleanArchitect.Application.DTOs;
+using CleanArchitect.Application.DTOs.LeaveType;
 using CleanArchitect.Application.Features.LeaveTypes.Requests.Queries;
 using CleanArchitect.Application.Persistence.Contracts;
 using MediatR;

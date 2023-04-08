@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using CleanArchitect.Application.DTOs.LeaveType;
 using MediatR;
 
-namespace CleanArchitect.Application.Features.LeaveTypes.Requests.Queries
+namespace CleanArchitect.Application.Features.LeaveTypes.Requests.Commands
 {
-    public class GetLeaveTypeListRequest : IRequest<List<LeaveTypeDto>>
+    public class CreateLeaveTypeCommand : IRequest<int>
     {
+        public CreateLeaveTypeDto LeaveTypeDto { get; set; }
     }
 }

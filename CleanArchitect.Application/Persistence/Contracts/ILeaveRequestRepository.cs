@@ -9,5 +9,8 @@ namespace CleanArchitect.Application.Persistence.Contracts
 {
     public interface ILeaveRequestRepository : IGenericRepository<LeaveRequest>
     {
+        Task<LeaveRequest> GetLeaveRequestWithDetails(int Id);
+        Task<List<LeaveRequest>> GetLeaveRequestsWithDetails();
+        Task ChangeApprovalStatus(LeaveRequest leaveRequest, bool? Approved);
     }
 }
