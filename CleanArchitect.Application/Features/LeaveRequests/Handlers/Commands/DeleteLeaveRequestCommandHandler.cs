@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using CleanArchitect.Application.Exceptions;
 using CleanArchitect.Application.Features.LeaveRequests.Requests.Commands;
 using CleanArchitect.Application.Persistence.Contracts;
+using CleanArchitect.Domain;
 using MediatR;
 
 namespace CleanArchitect.Application.Features.LeaveRequests.Handlers.Commands
@@ -22,6 +24,8 @@ namespace CleanArchitect.Application.Features.LeaveRequests.Handlers.Commands
         public async Task<Unit> Handle(DeleteLeaveRequestCommand request, CancellationToken cancellationToken)
         {
             var leaveRequest = await _leaveRequestRepository.Get(request.Id);
+            if (leaveRequest == null)
+                throw new NotFoundException(nameof(LeaveRequest), request.Id);
             await _leaveRequestRepository.Delete(leaveRequest);
             return Unit.Value;
         }

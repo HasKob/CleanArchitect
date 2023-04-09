@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitect.Application.DTOs.LeaveRequest.Validators;
+using CleanArchitect.Application.Exceptions;
 using CleanArchitect.Application.Features.LeaveRequests.Requests.Commands;
 using CleanArchitect.Application.Persistence.Contracts;
+using CleanArchitect.Domain;
 using MediatR;
 
 namespace CleanArchitect.Application.Features.LeaveRequests.Handlers.Commands
@@ -27,9 +29,11 @@ namespace CleanArchitect.Application.Features.LeaveRequests.Handlers.Commands
             var validator = new UpdateLeaveRequestDtoValidator(_leaveTypeRepository);
             var validationResult = await validator.ValidateAsync(request.LeaveRequestDto);
             if (validationResult.IsValid == false)
-                throw new Exception();
+                throw new ValidationException(validationResult);
 
             var leaveRequest = await _leaveRequestRepository.Get(request.Id);
+            if (leaveRequest == null)
+                throw new NotFoundException(nameof(LeaveRequest), request.LeaveRequestDto.Id);
             if (request.LeaveRequestDto is not null)
             {
                 _mapper.Map(request.LeaveRequestDto, leaveRequest);

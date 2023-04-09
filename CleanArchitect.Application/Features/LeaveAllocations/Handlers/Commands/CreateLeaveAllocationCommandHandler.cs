@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitect.Application.DTOs.LeaveAllocation.Validators;
+using CleanArchitect.Application.Exceptions;
 using CleanArchitect.Application.Features.LeaveAllocations.Requests.Commands;
 using CleanArchitect.Application.Persistence.Contracts;
 using CleanArchitect.Domain;
@@ -28,7 +29,7 @@ namespace CleanArchitect.Application.Features.LeaveAllocations.Handlers.Commands
             var validator = new CreateLeaveAllocationDtoValidator(_leaveTypeRepository);
             var validationResult = await validator.ValidateAsync(request.LeaveAllocationDto);
             if (validationResult.IsValid == false)
-                throw new Exception();
+                throw new ValidationException(validationResult);
 
             var leaveAllocation = _mapper.Map<LeaveAllocation>(request.LeaveAllocationDto);
             leaveAllocation = await _leaveAllocationRepository.Add(leaveAllocation);

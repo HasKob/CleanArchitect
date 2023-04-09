@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using CleanArchitect.Application.Exceptions;
 using CleanArchitect.Application.Features.LeaveAllocations.Requests.Commands;
 using CleanArchitect.Application.Persistence.Contracts;
+using CleanArchitect.Domain;
 using MediatR;
 
 namespace CleanArchitect.Application.Features.LeaveAllocations.Handlers.Commands
@@ -22,6 +24,8 @@ namespace CleanArchitect.Application.Features.LeaveAllocations.Handlers.Commands
         public async Task<Unit> Handle(DeleteLeaveAllocationCommand request, CancellationToken cancellationToken)
         {
             var leaveAllocation = await _leaveAllocationRepository.Get(request.Id);
+            if (leaveAllocation == null)
+                throw new NotFoundException(nameof(LeaveAllocation), request.Id);
             await _leaveAllocationRepository.Delete(leaveAllocation);
             return Unit.Value;
         }
