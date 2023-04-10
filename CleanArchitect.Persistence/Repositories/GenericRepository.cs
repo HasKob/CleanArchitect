@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CleanArchitect.Application.Persistence.Contracts;
+using CleanArchitect.Application.Contracts.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitect.Persistence.Repositories

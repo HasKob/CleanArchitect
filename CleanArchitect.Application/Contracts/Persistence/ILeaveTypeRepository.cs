@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CleanArchitect.Domain;
 
-namespace CleanArchitect.Application.Persistence.Contracts
+namespace CleanArchitect.Application.Contracts.Persistence
 {
     public interface ILeaveTypeRepository : IGenericRepository<LeaveType>
     {

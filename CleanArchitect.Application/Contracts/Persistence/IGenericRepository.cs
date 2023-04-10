@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanArchitect.Application.Persistence.Contracts
+namespace CleanArchitect.Application.Contracts.Persistence
 {
     public interface IGenericRepository<T> where T : class
     {

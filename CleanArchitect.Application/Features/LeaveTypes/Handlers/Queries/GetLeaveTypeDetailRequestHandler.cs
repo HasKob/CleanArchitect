@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CleanArchitect.Application.DTOs.LeaveType;
 using CleanArchitect.Application.Features.LeaveTypes.Requests.Queries;
-using CleanArchitect.Application.Persistence.Contracts;
+using CleanArchitect.Application.Contracts.Persistence;
 using MediatR;
 
 namespace CleanArchitect.Application.Features.LeaveTypes.Handlers.Queries

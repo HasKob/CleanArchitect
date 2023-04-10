@@ -7,7 +7,7 @@ using AutoMapper;
 using CleanArchitect.Application.DTOs.LeaveRequest.Validators;
 using CleanArchitect.Application.Exceptions;
 using CleanArchitect.Application.Features.LeaveRequests.Requests.Commands;
-using CleanArchitect.Application.Persistence.Contracts;
+using CleanArchitect.Application.Contracts.Persistence;
 using CleanArchitect.Domain;
 using MediatR;
 
