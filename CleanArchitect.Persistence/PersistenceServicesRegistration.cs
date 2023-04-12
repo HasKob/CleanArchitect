@@ -13,7 +13,7 @@ namespace CleanArchitect.Persistence
 {
     public static class PersistenceServicesRegistration
     {
-        public static IServiceCollection ConfigurePersitenceServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigurePersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<CleanArchitectDbContext>(options =>
             {
