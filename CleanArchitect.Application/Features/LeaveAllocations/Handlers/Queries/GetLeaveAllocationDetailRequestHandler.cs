@@ -8,6 +8,8 @@ using CleanArchitect.Application.DTOs.LeaveAllocation;
 using CleanArchitect.Application.Features.LeaveAllocations.Requests.Queries;
 using CleanArchitect.Application.Contracts.Persistence;
 using MediatR;
+using CleanArchitect.Application.Exceptions;
+using CleanArchitect.Domain;
 
 namespace CleanArchitect.Application.Features.LeaveAllocations.Handlers.Queries
 {
@@ -23,6 +25,8 @@ namespace CleanArchitect.Application.Features.LeaveAllocations.Handlers.Queries
         public async Task<LeaveAllocationDto> Handle(GetLeaveAllocationDetailRequest request, CancellationToken cancellationToken)
         {
             var leaveAllocation = await _leaveAllocationRepository.GetLeaveAllocationWithDetails(request.Id);
+            if (leaveAllocation == null)
+                throw new NotFoundException(nameof(LeaveType), request.Id);
             return _mapper.Map<LeaveAllocationDto>(leaveAllocation);
         }
     }

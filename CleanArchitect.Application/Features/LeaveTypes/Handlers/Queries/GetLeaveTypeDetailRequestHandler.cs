@@ -8,6 +8,8 @@ using CleanArchitect.Application.DTOs.LeaveType;
 using CleanArchitect.Application.Features.LeaveTypes.Requests.Queries;
 using CleanArchitect.Application.Contracts.Persistence;
 using MediatR;
+using CleanArchitect.Application.Exceptions;
+using CleanArchitect.Domain;
 
 namespace CleanArchitect.Application.Features.LeaveTypes.Handlers.Queries
 {
@@ -23,6 +25,8 @@ namespace CleanArchitect.Application.Features.LeaveTypes.Handlers.Queries
         public async Task<LeaveTypeDto> Handle(GetLeaveTypeDetailRequest request, CancellationToken cancellationToken)
         {
             var leaveType = await _leaveTypeRepository.Get(request.Id);
+            if (leaveType == null)
+                throw new NotFoundException(nameof(LeaveType), request.Id);
             return _mapper.Map<LeaveTypeDto>(leaveType);
         }
     }
