@@ -10,6 +10,7 @@ using CleanArchitect.Application.Exceptions;
 using CleanArchitect.Application.Features.LeaveTypes.Handlers.Commands;
 using CleanArchitect.Application.Features.LeaveTypes.Requests.Commands;
 using CleanArchitect.Application.Profiles;
+using CleanArchitect.Application.Responses;
 using CleanArchitect.Application.UnitTests.Mocks;
 using Moq;
 using Shouldly;
@@ -36,7 +37,7 @@ namespace CleanArchitect.Application.UnitTests.LeaveTypes.Commands
         public async Task Valid_LeaveType_Added()
         {
             var result = await _handler.Handle(new CreateLeaveTypeCommand() { LeaveTypeDto = _leaveTypeDto }, CancellationToken.None);
-            result.ShouldBeOfType<int>();
+            result.ShouldBeOfType<BaseCommandResponse>();
 
             var leaveTypes = await _mockRepo.Object.GetAll();
             leaveTypes.Count.ShouldBe(4);
@@ -45,12 +46,8 @@ namespace CleanArchitect.Application.UnitTests.LeaveTypes.Commands
         public async Task InValid_LeaveType_Added()
         {
             _leaveTypeDto.DefaultDays = -1;
-            ValidationException ex = await Should.ThrowAsync<ValidationException>(
-                async () => await _handler.Handle(new CreateLeaveTypeCommand() { LeaveTypeDto = _leaveTypeDto }, CancellationToken.None)
-                );
-
-            ex.ShouldNotBeNull();
-
+            var result = await _handler.Handle(new CreateLeaveTypeCommand() { LeaveTypeDto = _leaveTypeDto }, CancellationToken.None);
+            result.ShouldBeOfType<BaseCommandResponse>();
             var leaveTypes = await _mockRepo.Object.GetAll();
             leaveTypes.Count.ShouldBe(3);
         }

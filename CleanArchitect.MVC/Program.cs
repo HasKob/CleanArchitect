@@ -1,6 +1,17 @@
+using System.Reflection;
+using CleanArchitect.MVC.Contracts;
+using CleanArchitect.MVC.Services;
+using CleanArchitect.MVC.Services.Base;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpClient<IClient, Client>(cl => cl.BaseAddress = new Uri("https://localhost:7241"));
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
+builder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

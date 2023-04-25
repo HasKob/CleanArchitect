@@ -1,6 +1,7 @@
 ﻿using CleanArchitect.Application.DTOs.LeaveType;
 using CleanArchitect.Application.Features.LeaveTypes.Requests.Commands;
 using CleanArchitect.Application.Features.LeaveTypes.Requests.Queries;
+using CleanArchitect.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,10 +36,10 @@ namespace CleanArchitect.API.Controllers
 
         // POST api/<LeaveTypesController>
         [HttpPost]
-        public async Task<ActionResult<int>> Post([FromBody] CreateLeaveTypeDto leaveTypeDto)
+        public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateLeaveTypeDto leaveTypeDto)
         {
-            int leaveTypeId = await _mediator.Send(new CreateLeaveTypeCommand { LeaveTypeDto = leaveTypeDto });
-            return Ok(leaveTypeId);
+            BaseCommandResponse response = await _mediator.Send(new CreateLeaveTypeCommand { LeaveTypeDto = leaveTypeDto });
+            return Ok(response);
         }
 
         // PUT api/<LeaveTypesController>
@@ -54,7 +55,7 @@ namespace CleanArchitect.API.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             await _mediator.Send(new DeleteLeaveTypeCommand { Id = id });
-            return NoContent();
+            return Ok();
         }
     }
 }
