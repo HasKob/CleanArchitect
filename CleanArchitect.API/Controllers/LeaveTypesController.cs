@@ -3,6 +3,7 @@ using CleanArchitect.Application.Features.LeaveTypes.Requests.Commands;
 using CleanArchitect.Application.Features.LeaveTypes.Requests.Queries;
 using CleanArchitect.Application.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,6 +21,7 @@ namespace CleanArchitect.API.Controllers
         }
         // GET: api/<LeaveTypesController>
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<List<LeaveTypeDto>>> Get()
         {
             var leaveTypes = await _mediator.Send(new GetLeaveTypeListRequest());
