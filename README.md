@@ -8,7 +8,7 @@ In terms of design patterns, the repository uses the following:
 - Repository Pattern: The repository pattern is used in the Infrastructure layer to provide a layer of abstraction over the data access implementation. This allows for the implementation details to be swapped out without affecting the rest of the application.
 
 - Mediator Pattern: The mediator pattern is used in the Application layer to decouple the use case implementation from the controllers. This allows for a more flexible and maintainable architecture.
-
+- Factory Pattern: The factory pattern is used in the Infrastructure layer. This allows for more flexibility and testability in the implementation of the data access layer.
 - CQRS Pattern: The Command Query Responsibility Segregation (CQRS) pattern is used in the Application layer to separate the commands and queries that the system can handle. This allows for more separation of concerns and scalability.
 
 - Dependency Injection: The repository uses the built-in .NET dependency injection framework to manage the dependencies between the layers of the application. This allows for more maintainable and testable code.
